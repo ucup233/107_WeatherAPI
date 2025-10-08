@@ -68,6 +68,12 @@
         ambilCuaca(lokasi);
       }
     });
+
+    document.getElementById("lokasiInput").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        document.getElementById("cariBtn").click();
+      }
+    });
   </script>
 </body>
 </html>

@@ -60,6 +60,14 @@
         }
       });
     }
+    ambilCuaca("Yogyakarta");
+
+    document.getElementById("cariBtn").addEventListener("click", function() {
+      const lokasi = document.getElementById("lokasiInput").value.trim();
+      if (lokasi) {
+        ambilCuaca(lokasi);
+      }
+    });
   </script>
 </body>
 </html>

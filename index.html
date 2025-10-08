@@ -20,5 +20,46 @@
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <script>
+    function ambilCuaca(lokasi) {
+      const urlapi = `http://api.weatherapi.com/v1/current.json?key=91edf05be7ed467e9f764136250810&q=${encodeURIComponent(lokasi)}&aqi=no`;
+      $.ajax({
+        url: urlapi,
+        method: "GET",
+        success: function(result){
+          const v = document.getElementById("hasil");
+          const w = document.getElementById("lokasi");
+
+          let lokasi = result.location.name;
+          let suhu = result.current.temp_c;
+          let negara = result.location.country;
+          let provinsi = result.location.region;
+          let kecamatan = result.location.name;
+          let longitude = result.location.lon;
+          let latitude = result.location.lat;
+          let kondisi = result.current.condition.text;
+          let icon = result.current.condition.icon;
+
+          v.innerHTML = `
+            <div style="text-align:center">
+              <img src="https:${icon}" alt="${kondisi}" width="80"><br>
+              <strong>${kondisi}</strong>
+            </div><br>
+            <strong>Suhu:</strong> ${suhu}°C<br>
+            <strong>Negara:</strong> ${negara} <br>
+            <strong>Provinsi:</strong> ${provinsi}<br>
+            <strong>Kecamatan:</strong> ${kecamatan} <br>
+            <strong>Longitude:</strong> ${longitude} <br>
+            <strong>Latitude:</strong> ${latitude} <br>
+          `;
+          w.innerHTML = lokasi;
+        },
+        error: function(error){
+          document.getElementById("hasil").innerHTML = "Gagal memuat data cuaca ☁️";
+          document.getElementById("lokasi").innerHTML = "";
+        }
+      });
+    }
+  </script>
 </body>
 </html>
